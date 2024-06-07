@@ -1,0 +1,77 @@
+<!doctype html>
+<link href="/style.css" rel="stylesheet">
+<html lang="en">
+<title>waqq.ly - Dog Owner Sign Up!</title>
+
+<body>
+    <h1>Dog Owner Sign Up Form</h1>
+    <h2>Please fill all the boxes below!</h2>
+    <form>
+        <div>
+            <label for="NameInputeBox">First Name</label>
+            <input type="text" id="NameInputeBox" placeholder="First name">
+        </div>
+
+        <div>
+            <label for="LastNameInputeBox">Last Name</label>
+            <input type="text" id="LastNameInputeBox" placeholder="Last name">
+        </div>
+
+        <div>
+            <label for="PhoneNumberInputeBox">Phone Number</label>
+            <input type="text" id="PhoneNumberInputeBox" placeholder="Phone Number">
+        </div>
+
+        <div>
+            <label for="DogBreedInputeBox">Dog Breed</label>
+            <input type="text" id="DogBreedInputeBox" placeholder="Dog Breed">
+        </div>
+
+        <div>
+            <label for="DogNameInputeBox">Dog Name</label>
+            <input type="text" id="DogNameInputeBox" placeholder="Dog Name">
+        </div>
+
+        <div>
+            <label for="AvialiabilityInputeBox">Avialiability</label>
+            <input type="text" id="AvialiabilityInputeBox" placeholder="Avialiability">
+        </div>
+
+        <div>
+            <Button id="SingUpButton">Sign Up!</Button>
+        </div>
+    </form>
+    <Button onclick="location.href='/'">Back to Main Menu!</Button>
+
+    <script>
+        // Creating an Empty Array that information from form will go to
+        let DogOwnersArray = [];
+        const addDogOwner = (ev)=>{
+            ev.preventDefault(); //Prevents browsers defult behaviour of reloading a page
+            let DogOwnerInformation = {
+                id: Date.now(),
+                FirstName: document.getElementById('NameInputeBox').value, //Collect information located in first box
+                LastName: document.getElementById('LastNameInputeBox').value, //Collect information located in Second box
+                PhoneNumber: document.getElementById('PhoneNumberInputeBox').value, //Collect information located in Third box
+                DogBreed: document.getElementById('DogBreedInputeBox').value, //Collect information located in Fourth box
+                DogName: document.getElementById('DogNameInputeBox').value, //Collect information located in Fifth box
+                AvialiabilitySlot: document.getElementById('AvialiabilityInputeBox').value //Collect information located in Sixth box
+            }
+            DogOwnersArray.push(DogOwnerInformation); //Push the information collected into an array
+            document.forms[0].reset(); //Clear entries for next signup
+
+            //For Debugging purposes
+            console.warn('added', {DogOwnersArray});
+            let pre = document.querySelector('#msh pre');
+            pre.textContent = '\n' + JSON.stringify(DogOwnersArray, '\t' , 2);
+
+            //Saving on localstorage
+            localStorage.setItem('DogOwnerList', JSON.stringify(Movies));
+        }
+        // Event listener that allows this script to be executed when clicked
+        document.addEventListener('DOMContentLoaded', ()=>{
+            document.getElementById('SingUpButton').addEventListener('click', addDogOwner);
+        });
+    </script>
+</body>
+</html>
